@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import {AiFillLike,AiOutlineLike} from "react-icons/ai";
 import formatDistance from "date-fns/formatDistance";
+import DummyImages from "../assetts/img/DummyImages.jfif";
 
 function Post({post,setData}){
     const {currentUser}=useSelector((state)=>state.user);
@@ -40,7 +41,7 @@ function Post({post,setData}){
         {userData&&(
             <>
         <div className="flex">
-         <img src="" alt=""/>
+         <img className="mx-1" style={{width:"40px",height:"40px",borderRadius:"50%"}} src={DummyImages} alt="NA"/>
          <Link to={`/profile/${userData._id}`}>
             <h3 className="font-bold">{userData.Username}</h3>
          </Link>

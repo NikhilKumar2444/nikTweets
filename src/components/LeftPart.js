@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {AiOutlineEdit} from "react-icons/ai";
 
 function LeftPart(){
     const {currentUser}=useSelector((state)=>state.user);
@@ -34,10 +35,12 @@ function LeftPart(){
             console.log(err);
         }
     };
+    const editProfile=()=>{
+
+    }
     useEffect(()=>{
     const addData=async(e)=>{
         if(id){
-            console.log("bsdk");
             const userL=await axios.get(`http://localhost:8000/api/users/find/${id}`);
             setLeftSideUser(userL.data);
             setUserName(userL.data.Username);
@@ -67,18 +70,24 @@ function LeftPart(){
 },[]);
     return(
         <>
-        <div className="m-2 md:w-1/4">
-            <div className="m-2">
-            <h1 className="flex text-2xl font-bold items-between justify-center">{userName}</h1>
-            <h1 className="text-xl flex items-between justify-center">{firstName}
-            {" "+lastName}</h1>
-            <h1 className="flex items-between justify-center">Followers{" | "+followersCount+" "}
-            Following{" | "+followingCount}</h1>
-            {
-                (id&&!(id===currentUser._id))?(following?(<button className="ml-20" style={{backgroundColor:"crimson",color:"white",borderRadius:"5px"}} onClick={handleUnFollow}>unfollow</button>):(<button className="ml-20" style={{backgroundColor:"lightgreen",color:"white",borderRadius:"5px"}} onClick={handleFollow}>follow</button>)):(<div></div>)
-            }
-            <h1 className="flex items-between justify-center text-slate-500">{email}</h1>
-            </div>
+        <div className="md:fixed m-2 md:w-1/5">
+                <div className="m-5 mt-5 flex items-between justify-center">
+                    <img src={require("../assetts/img/DummyImages.jfif")} style={{borderRadius:"50%",width:"80px",height:"80px"}}/>
+                </div>
+                <div className="m-2">
+                    <h1 className="flex text-2xl font-bold items-between justify-center">{userName}</h1>
+                    <h1 className="text-xl flex items-between justify-center">{firstName}
+                    {" "+lastName}</h1>
+                    <h1 className="flex items-between justify-center">Followers{" | "+followersCount+" "}
+                    Following{" | "+followingCount}</h1>
+                    {
+                        (id&&!(id===currentUser._id))?(following?(<button className="ml-20" style={{backgroundColor:"crimson",color:"white",borderRadius:"5px"}} onClick={handleUnFollow}>unfollow</button>):(<button className="ml-20" style={{backgroundColor:"lightgreen",color:"white",borderRadius:"5px"}} onClick={handleFollow}>follow</button>)):(<div></div>)
+                    }
+                    <h1 className="flex items-between justify-center text-slate-500">{email}</h1>
+                    <div className="mt-2">
+                        <button onClick={editProfile}><AiOutlineEdit/></button>
+                    </div>
+                </div>
         </div>
         </>
     );

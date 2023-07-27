@@ -117,3 +117,15 @@ export const getByUsername=async(req,res,next)=>{
     }
 }
 
+export const fuzzySearch=async(req,res,next)=>{
+    try{
+        const user= await User.find({Username:{$regex:req.body.Username}});
+        if(user){
+            res.status(200).json(user);
+        }
+    }
+    catch(err){
+        res.status(500);
+        next(err);
+    }
+}

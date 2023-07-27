@@ -1,8 +1,7 @@
-import {react, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Post from "./Post";
-import Login from "./Login";
 
 //everyone
 
@@ -26,7 +25,7 @@ function ExploreTimeline(){
     },[currentUser._id]);
     return(
         
-        <div className="mt-2">
+        <div className="mt-2 md:ml-80">
         {homeTimeline && homeTimeline.map((post)=>{
             return(
                 <div key={post._id} className="p-2">

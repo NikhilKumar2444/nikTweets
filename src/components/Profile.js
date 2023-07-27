@@ -9,7 +9,7 @@ function Profile(){
         <Navbar/>
         <div className="mt-40 md:mt-20 md:flex">
           <LeftPart/>
-          <div className='w-full'>
+          <div className='w-full md:ml-80'>
             <CreatePost/>
             <ProfileTimeline/>
           </div>

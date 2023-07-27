@@ -4,7 +4,7 @@ import HomeTimeline from "./HomeTimeline";
 function MainFeed(){
     return (
         <>
-        <div className="w-full">
+        <div className="w-full md:ml-80">
         <CreatePost/>
         <HomeTimeline/>
         </div>

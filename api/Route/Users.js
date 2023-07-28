@@ -10,5 +10,5 @@ userRoutes.delete("/:id",verifyToken,deleteUser);
 userRoutes.put("/follow/:id",verifyToken,followUser);
 userRoutes.put("/unfollow/:id",verifyToken,unfollowUser);
 userRoutes.get("/individual/:username",verifyToken,getByUsername);
-userRoutes.get("/fuzzy",verifyToken,fuzzySearch)
+userRoutes.get("/fuzzy/:str",verifyToken,fuzzySearch)
 export default userRoutes;

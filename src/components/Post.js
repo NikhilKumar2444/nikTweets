@@ -5,6 +5,7 @@ import axios from "axios";
 import {AiFillLike,AiOutlineLike} from "react-icons/ai";
 import formatDistance from "date-fns/formatDistance";
 import DummyImages from "../assetts/img/DummyImages.jfif";
+import {MdOutlineDeleteForever} from "react-icons/md";
 
 function Post({post,setData}){
     const {currentUser}=useSelector((state)=>state.user);
@@ -25,6 +26,17 @@ function Post({post,setData}){
         fetchData();
     },[post.UserId,post.Likes]);
 
+    const manageDelete=async(e)=>{
+        e.preventDefault();
+        try{
+            await axios.delete(`http://localhost:8000/api/posts/delete/${post._id}`,{
+                data:{id:currentUser._id}
+            })
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     const handleOnClick = async(e)=>{
         e.preventDefault();
         try{
@@ -41,12 +53,15 @@ function Post({post,setData}){
         {userData&&(
             <>
         <div className="flex">
-         <img className="mx-1" style={{width:"40px",height:"40px",borderRadius:"50%"}} src={DummyImages} alt="NA"/>
-         <Link to={`/profile/${userData._id}`}>
-            <h3 className="font-bold">{userData.Username}</h3>
-         </Link>
-         <p>{"-->"}{dateStr}</p>
-         </div>
+            <img className="mx-1" style={{width:"40px",height:"40px",borderRadius:"50%"}} src={DummyImages} alt="NA"/>
+            <Link to={`/profile/${userData._id}`}>
+                <h3 className="font-bold">{userData.Username}</h3>
+            </Link>
+            <p>{"-->"}{dateStr}</p>
+            {currentUser._id===userData._id?(
+            <button onClick={manageDelete}><MdOutlineDeleteForever className="text-xl ml-2" style={{left:"200px"}}/></button>):(<></>)
+            }
+        </div>
          <p>{post.Description}</p>
          <button onClick={handleOnClick}>{post.Likes.includes(currentUser._id)?( <AiFillLike className="text-xl cursor-pointer"/>):(<AiOutlineLike className="text-xl cursor-pointer"/>)}
          {post.Likes.length}

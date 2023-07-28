@@ -21,11 +21,11 @@ export const deletePost=async(req,res,next)=>{
             res.status(200).json("Deleted");
         }
         else{
-            res.send(500).json(err);
+            res.status(500);
         }
     }
     catch(err){
-        res.status(500);
+        res.status(500).json(err);
         next(err);
     }
 }
@@ -59,7 +59,7 @@ export const timeline=async(req,res,next)=>{
         );
         res.status(200).json(userPosts.concat(...followingPosts))
     }catch(err){
-        res.send(500);
+        res.status(500);
         next(err);
     }
 }

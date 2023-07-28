@@ -67,7 +67,7 @@ function LeftPart(){
         }
     }
     addData();
-},[]);
+},id);
     return(
         <>
         <div className="md:fixed m-2 md:w-1/5">

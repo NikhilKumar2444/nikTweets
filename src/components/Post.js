@@ -52,20 +52,31 @@ function Post({post,setData}){
         <>
         {userData&&(
             <>
-        <div className="flex">
-            <img className="mx-1" style={{width:"40px",height:"40px",borderRadius:"50%"}} src={DummyImages} alt="NA"/>
-            <Link to={`/profile/${userData._id}`}>
-                <h3 className="font-bold">{userData.Username}</h3>
-            </Link>
-            <p>{"-->"}{dateStr}</p>
-            {currentUser._id===userData._id?(
-            <button onClick={manageDelete}><MdOutlineDeleteForever className="text-xl ml-2" style={{left:"200px"}}/></button>):(<></>)
-            }
-        </div>
-         <p>{post.Description}</p>
-         <button onClick={handleOnClick}>{post.Likes.includes(currentUser._id)?( <AiFillLike className="text-xl cursor-pointer"/>):(<AiOutlineLike className="text-xl cursor-pointer"/>)}
-         {post.Likes.length}
-         </button>
+            <div className="card md:w-3/4">
+                <div className="card-header">
+                    <div className="flex justify-between">
+                        <Link to={`/profile/${userData._id}`}>
+                                <img className="m-1" style={{width:"40px",height:"40px",borderRadius:"50%"}} src={DummyImages} alt="NA"/>
+                                <h3 className="font-bold">{userData.Username}</h3>
+                        </Link>
+                        <div className="flex">
+                        <p style={{color:"gray"}}>{dateStr}</p>
+                        <div>
+                        {currentUser._id===userData._id?(
+                            <button onClick={manageDelete}><MdOutlineDeleteForever className="text-xl m-1" style={{left:"200px"}}/></button>):(<></>)
+                        }
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <h5 className="card-title">{post.Description}</h5>
+                    <button className="flex btn btn-primary" onClick={handleOnClick}>{post.Likes.includes(currentUser._id)?( <AiFillLike className="text-xl m-1 cursor-pointer"/>):(<AiOutlineLike className="text-xl m-1 cursor-pointer"/>)}
+                    <div className="text-xl">{post.Likes.length}</div>
+                    </button>
+                </div>
+            </div>
+            
          </>
     )}
         </>

@@ -1,7 +1,6 @@
 import {BiSearchAlt} from 'react-icons/bi';
 import {FaHashtag} from 'react-icons/fa';
 import {AiOutlineHome} from 'react-icons/ai';
-import {AiOutlineLogout} from 'react-icons/ai';
 import {CgProfile} from 'react-icons/cg';
 import {logout} from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
@@ -9,10 +8,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GiExitDoor } from 'react-icons/gi';
-import {react,useState,useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
-import SearchbarComponent from './SearchbarComponent';
 import DummyImages from "../assetts/img/DummyImages.jfif";
+import './Navbar.css';
 
 function Navbar(){
     const dispatch=useDispatch();
@@ -25,6 +24,20 @@ function Navbar(){
         dispatch(logout());
         navigate("/");
     }
+
+    const [theme,setTheme]=useState();
+    const themeToggler=()=>{
+        if(theme==='light'){
+            setTheme('dark');
+        }
+        else{
+            setTheme('light');
+        }
+    }
+
+    useEffect(()=>{
+        document.body.className=theme;
+    },[theme]);
 
     const searchAll=async(e)=>{
         e.preventDefault();
@@ -42,12 +55,11 @@ function Navbar(){
 
     return(
         <>
-        <div style={{position: 'fixed',
+        <div className="Navbar" style={{position: 'fixed',
         top: 0,
         left: 0,
         width: '100%',
         height: 'auto',
-        backgroundColor: '#333',
         color: '#fff',
         textAlign: 'center',
         zIndex: 1000}} >
@@ -60,9 +72,10 @@ function Navbar(){
                     <button onClick={handleLogOut}><h1 className="font-bold md:m-1 md:ml-5 md:text-2xl"><GiExitDoor style={{color:"red"}}/></h1></button>
                 </div>
                 <div>
-                    <div className="flex justify-between items-center">
-                        <input type="text" placeholder='Search...'  onChange={searchAll} style={{color:"black",outline:"none"}} className="rounded-full p-2"></input>
-                        <BiSearchAlt className='text-2xl m-1'/>
+                    <div className="flex justify-between items-center m-1" style={{backgroundColor:"white",borderRadius:"10px"}} >
+                        <input type="text" placeholder='Search...'  onChange={searchAll} style={{color:"black",outline:"none"}} className="rounded-full p-2">
+                        </input>
+                        <BiSearchAlt style={{color:"black"}} className='text-2xl m-1'/>
                     </div>
                     <div className={searchTxt?'absolute p-2 m-2':'block'} style={{backgroundColor:"gray",color:"white",borderRadius:"5px"}}>
                         <div style={{maxHeight:"100px",overflowY:"auto"}}>
@@ -80,6 +93,7 @@ function Navbar(){
                         })}
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

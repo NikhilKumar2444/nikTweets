@@ -81,7 +81,7 @@ function LeftPart(){
                     <h1 className="flex items-between justify-center">Followers{" | "+followersCount+" "}
                     Following{" | "+followingCount}</h1>
                     {
-                        (id&&!(id===currentUser._id))?(following?(<button className="ml-20" style={{backgroundColor:"crimson",color:"white",borderRadius:"5px"}} onClick={handleUnFollow}>unfollow</button>):(<button className="ml-20" style={{backgroundColor:"lightgreen",color:"white",borderRadius:"5px"}} onClick={handleFollow}>follow</button>)):(<div></div>)
+                        (id&&!(id===currentUser._id))?(following?(<div className="flex items-between justify-center"><button className="btn btn-success" onClick={handleUnFollow}>unfollow</button></div>):(<div className="flex items-between justify-center"><button className="btn btn-success" onClick={handleFollow}>follow</button></div>)):(<div></div>)
                     }
                     <h1 className="flex items-between justify-center text-slate-500">{email}</h1>
                     <div className="mt-2">

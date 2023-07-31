@@ -9,6 +9,7 @@ Route,
 Link
 } from 'react-router-dom';
 import Register from './components/Register';
+import "./scrollbar.css";
 
 function App() {
   return (

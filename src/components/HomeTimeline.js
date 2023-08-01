@@ -15,9 +15,6 @@ function HomeTimeline(){
             try{
                 const timeLinePosts=await axios.get(`http://localhost:8000/api/posts/timeline/${currentUser._id}`);
                 setHomeTimeline(timeLinePosts.data);
-                console.log(currentUser._id);
-                console.log(homeTimeline);
-
             }catch(err){
                 console.log(err);
             }
@@ -25,7 +22,6 @@ function HomeTimeline(){
         fetchData();
     },[currentUser._id]);
     
-    console.log(homeTimeline);
 
     return(<div className="mt-2">
         {homeTimeline && homeTimeline.map((post)=>{
